@@ -56,7 +56,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return Inertia('Project/Show', [
+            'project' => new ProjectResource($project),
+        ]);
     }
 
     /**
