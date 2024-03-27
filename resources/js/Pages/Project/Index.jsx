@@ -44,9 +44,17 @@ export default function Index({ auth, projects, queryParams = null }) {
     <AuthenticatedLayout
       user={auth.user}
       header={
-        <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-          Projects
-        </h2>
+        <div className="flex justify-between items-center">
+          <h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            Projects
+          </h2>
+          <Link
+            href={route("project.create")}
+            className="bg-emerald-500 py-1 px-3 text-white rounded shadow translation-all hover:bg-emerald-600"
+          >
+            Add new
+          </Link>
+        </div>
       }
     >
       <Head title="Projects" />
@@ -152,7 +160,9 @@ export default function Index({ auth, projects, queryParams = null }) {
                           <img src={project.image_path} style={{ width: 60 }} />
                         </td>
                         <td className="px-3 py-3 text-gray-100 hover:underline">
-                          <Link href={route('project.show', project.id)}>{project.name}</Link>
+                          <Link href={route("project.show", project.id)}>
+                            {project.name}
+                          </Link>
                         </td>
                         <td className="px-3 py-3">
                           <span
