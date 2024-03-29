@@ -7,7 +7,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 
 export default function Create({ auth }) {
-  const { data, setData, post } = useForm({
+  const { data, setData, post, errors, reset } = useForm({
     image: "",
     name: "",
     status: "",
@@ -15,12 +15,10 @@ export default function Create({ auth }) {
     due_date: "",
   });
 
-  const errors = {};
-
   const onSubmit = (e) => {
     e.preventDefault();
 
-    post(route("project.create"));
+    post(route("project.store"));
   };
 
   return (
@@ -50,9 +48,8 @@ export default function Create({ auth }) {
                   id="project_image_path"
                   type="file"
                   name="image"
-                  value={data.image}
                   className="mt-1 block w-full"
-                  onChange={(e) => setData("image", e.target.value)}
+                  onChange={(e) => setData("image", e.target.files[0])}
                 />
                 <InputError message={errors.image} className="mt-2" />
               </div>
